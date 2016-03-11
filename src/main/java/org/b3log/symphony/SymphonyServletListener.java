@@ -286,6 +286,9 @@ public final class SymphonyServletListener extends AbstractServletListener {
             admin.put(User.USER_EMAIL, init.getString("admin.email"));
             admin.put(User.USER_NAME, init.getString("admin.name"));
             admin.put(User.USER_PASSWORD, MD5.hash(init.getString("admin.password")));
+            admin.put(UserExt.USER_DELEGATE_ID, init.getString("admin.userDelegateId"));
+            admin.put(UserExt.USER_THIRD_PARTY_COMPANY_ID, init.getString("admin.userCompanyId"));
+            admin.put(UserExt.USER_FROM, init.getString("admin.from"));
             admin.put(User.USER_ROLE, Role.ADMIN_ROLE);
             admin.put(UserExt.USER_STATUS, UserExt.USER_STATUS_C_VALID);
             final String adminId = userMgmtService.addUser(admin);

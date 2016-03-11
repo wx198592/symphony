@@ -560,6 +560,31 @@ public final class Common {
     public static final String TOP_CHECKIN_USERS = "topCheckinUsers";
 
     /**
+     * Key of third party user access key.
+     */
+    public static final String THIRD_PARTY_KEY = "thirdPartyKey";
+    /**
+     * Key of third party user id.
+     */
+    public static final String THIRD_PARTY_USER_ID = "thirdPartyUserId";
+    /**
+     * Key of third party user name.
+     */
+    public static final String THIRD_PARTY_USER_NAME = "thirdPartyUserName";
+    /**
+     * Key of third party user from.
+     */
+    public static final String THIRD_PARTY_USER_FROM = "thirdPartyUserFrom";
+    /**
+     * Key of third party company id.
+     */
+    public static final String THIRD_PARTY_COMPANY_ID = "thirdPartyCompanyId";
+    /**
+     * Key of third party user icon.
+     */
+    public static final String THIRD_PARTY_USER_ICON = "thirdPartyUserIcon";
+
+    /**
      * Private constructor.
      */
     private Common() {

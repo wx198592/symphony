@@ -339,6 +339,33 @@ public class UserQueryService {
         }
     }
 
+    public JSONObject getUserByDelegateIdAndCompanyId(final String delegateId, final  String companyId) throws ServiceException {
+
+            final Query query = new Query().addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
+            final List<Filter> filters = new ArrayList<Filter>();
+            filters.add(new PropertyFilter(UserExt.USER_DELEGATE_ID, FilterOperator.EQUAL, delegateId));
+            filters.add(new PropertyFilter(UserExt.USER_THIRD_PARTY_COMPANY_ID, FilterOperator.EQUAL, companyId));
+            query.setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters));
+
+
+            JSONObject result = null;
+
+            try {
+                result = userRepository.get(query);
+                final JSONArray array = result.optJSONArray(Keys.RESULTS);
+
+                if (0 == array.length()) {
+                    return null;
+                }
+
+                return array.optJSONObject(0);
+            } catch (final RepositoryException e) {
+                LOGGER.log(Level.ERROR, "Gets users failed", e);
+
+                throw new ServiceException(e);
+            }
+    }
+
     /**
      * Gets users by the specified request json object.
      *

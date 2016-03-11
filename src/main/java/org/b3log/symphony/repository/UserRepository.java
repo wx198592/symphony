@@ -27,6 +27,7 @@ import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.SortDirection;
 import org.b3log.latke.repository.annotation.Repository;
 import org.b3log.latke.util.CollectionUtils;
+import org.b3log.symphony.model.UserExt;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

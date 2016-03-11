@@ -484,6 +484,66 @@ public class LoginProcessor {
     }
 
     /**
+     * Logins third party user.
+     *
+     * @param context the specified context
+     * @param request the specified request
+     * @param response the specified response
+     * @throws ServletException servlet exception
+     * @throws IOException io exception
+     */
+    @RequestProcessing(value = "/third_party_login", method = HTTPRequestMethod.GET)
+    public void thirdPartyLogin(final HTTPRequestContext context, final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+        context.renderJSON().renderMsg(langPropsService.get("loginFailLabel"));
+
+        LOGGER.log(Level.INFO, "3rd receive login");
+        String userDelegateId = request.getParameter(Common.THIRD_PARTY_USER_ID);
+        String userThirdPartyKey = request.getParameter(Common.THIRD_PARTY_KEY);
+        String userFrom = request.getParameter(Common.THIRD_PARTY_USER_FROM);
+        String userCompanyId = request.getParameter(Common.THIRD_PARTY_COMPANY_ID);
+        LOGGER.info(userFrom);
+        LOGGER.info(userDelegateId);
+        LOGGER.info(userThirdPartyKey);
+        LOGGER.info(userCompanyId);
+
+        try {
+            JSONObject user = userQueryService.getUserByDelegateIdAndCompanyId(userDelegateId, userCompanyId);
+//            LOGGER.info(user.toString());
+            if(null == user) {
+                context.renderMsg(langPropsService.get("notFoundUserLabel"));
+                return;
+            }
+
+            if (UserExt.USER_STATUS_C_INVALID == user.optInt(UserExt.USER_STATUS)) {
+                userMgmtService.updateOnlineStatus(user.optString(Keys.OBJECT_ID), "", false);
+                context.renderMsg(langPropsService.get("userBlockLabel"));
+
+                return;
+            }
+
+            final String userkey = user.optString(UserExt.USER_THIRD_PARTY_KEY);
+            if(userkey.equals(userThirdPartyKey)) {
+                Sessions.login(request, response, user);
+
+                final String ip = Requests.getRemoteAddr(request);
+                userMgmtService.updateOnlineStatus(user.optString(Keys.OBJECT_ID), ip, true);
+
+                context.renderMsg("").renderTrueResult();
+                context.getResponse().sendRedirect("/recent");
+
+                LOGGER.info("login success...");
+                return;
+            }
+            context.renderMsg(langPropsService.get("wrongPwdLabel"));
+
+        } catch (final ServiceException e) {
+            context.renderMsg(langPropsService.get("loginFailLabel"));
+        }
+
+    }
+
+    /**
      * Logins user.
      *
      * @param context the specified context

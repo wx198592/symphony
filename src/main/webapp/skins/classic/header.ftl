@@ -3,7 +3,7 @@
         <div class="head-fn fn-clear">
             <h1 class="fn-left">
                 <a href="/">
-                    <img src="${staticServePath}/images/hacpai.png" alt="${symphonyLabel}" title="${symphonyLabel}" width="42" class="fn-pointer" />
+                    <img src="${staticServePath}/images/bayview.png" alt="${symphonyLabel}" title="${symphonyLabel}" width="90" height="30" class="fn-pointer" />
                 </a>
             </h1>
             <!-- 百度站内搜索不支持 HTTPS -->
@@ -17,11 +17,12 @@
             </form>
             -->
             <div class="fn-right">
-                <a href="/timeline" class="icon-clock last" title="${timelineLabel}"></a>
+                <#--<a href="/timeline" class="icon-clock last" title="${timelineLabel}"></a>-->
                 <#if isLoggedIn>
-                <a href="/city/my" class="icon-compass" title="${sameCityLabel}"></a>
+                <#--<a href="/city/my" class="icon-compass" title="${sameCityLabel}"></a>-->
                 </#if>
-                <a href="/recent" class="icon-refresh" title="${recentArticleLabel}"></a>
+                <a href="/tags">${tagLabel}</a>
+                <a href="/recent">${recentArticleLabel}</a>
             </div>
         </div>
 

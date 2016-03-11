@@ -17,10 +17,8 @@ package org.b3log.symphony.processor;
 
 import com.qiniu.util.Auth;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.net.URL;
+import java.util.*;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +42,10 @@ import org.b3log.latke.servlet.annotation.Before;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.freemarker.AbstractFreeMarkerRenderer;
+import org.b3log.latke.urlfetch.HTTPHeader;
+import org.b3log.latke.urlfetch.HTTPRequest;
+import org.b3log.latke.urlfetch.URLFetchService;
+import org.b3log.latke.urlfetch.URLFetchServiceFactory;
 import org.b3log.latke.util.Paginator;
 import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.Strings;
@@ -73,11 +75,7 @@ import org.b3log.symphony.service.RewardQueryService;
 import org.b3log.symphony.service.ShortLinkQueryService;
 import org.b3log.symphony.service.UserQueryService;
 import org.b3log.symphony.service.VoteQueryService;
-import org.b3log.symphony.util.Emotions;
-import org.b3log.symphony.util.Filler;
-import org.b3log.symphony.util.Markdowns;
-import org.b3log.symphony.util.Sessions;
-import org.b3log.symphony.util.Symphonys;
+import org.b3log.symphony.util.*;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -187,6 +185,11 @@ public class ArticleProcessor {
      */
     @Inject
     private Filler filler;
+
+    /**
+     * URL fetch service.
+     */
+    private URLFetchService urlFetchService = URLFetchServiceFactory.getURLFetchService();
 
     /**
      * Shows pre-add article.
@@ -525,6 +528,54 @@ public class ArticleProcessor {
             articleMgmtService.addArticle(article);
 
             context.renderTrueResult();
+
+            //通知钉钉服务器
+            final HTTPRequest httpRequest = new HTTPRequest();
+            httpRequest.setURL(new URL(Dingding.DING_SERVER_URL));
+            httpRequest.setRequestMethod(HTTPRequestMethod.POST);
+            httpRequest.addHeader(new HTTPHeader("Content-Type", "application/json"));
+            final JSONObject notifyJSONObject = new JSONObject();
+            final JSONObject articleJSONObject = new JSONObject();
+
+            List<JSONObject> adminsJSONObject = new ArrayList<JSONObject>();
+
+            //如何发表文章的用户是来自钉钉得,则需要获取用户的userDelegateId 和 userCompanyId
+            JSONObject user = userQueryService.getUser(currentUser.optString(Keys.OBJECT_ID).toString());
+            String userFrom = user.optString(UserExt.USER_FROM);
+            if(userFrom.equals(Dingding.DING_DING)) {
+
+                //取得负责钉钉项目的论坛管理员
+                final List<JSONObject> admins = userQueryService.getAdmins();
+                LOGGER.info(admins.get(0).toString());
+                for(JSONObject admin: admins) {
+                    //通知钉钉管理员,有新帖产生
+                    if(admin.optString(UserExt.USER_FROM).equals(Dingding.DING_DING)) {
+                        final JSONObject adminJSONObject = new JSONObject();
+                        adminJSONObject.put(Common.THIRD_PARTY_USER_ID, admin.optString(UserExt.USER_DELEGATE_ID));
+                        adminJSONObject.put(Common.THIRD_PARTY_COMPANY_ID,
+                                admin.optString(UserExt.USER_THIRD_PARTY_COMPANY_ID));
+
+                        adminsJSONObject.add(adminJSONObject);
+//
+                    }
+                }
+                notifyJSONObject.put("admin", adminsJSONObject);
+
+                String userDelegateId = user.optString(UserExt.USER_DELEGATE_ID);
+                String userCompanyId = user.optString(UserExt.USER_THIRD_PARTY_COMPANY_ID);
+                articleJSONObject.put(Common.THIRD_PARTY_USER_ID, userDelegateId);
+                articleJSONObject.put(Common.THIRD_PARTY_COMPANY_ID, userCompanyId);
+                articleJSONObject.put(Article.ARTICLE_TITLE, articleTitle);
+                articleJSONObject.put(Article.ARTICLE_TAGS, articleTags);
+                articleJSONObject.put(Common.URL, Dingding.FORUM_SERVER_URL);
+
+                notifyJSONObject.put(Article.ARTICLE, articleJSONObject);
+
+                httpRequest.setPayload(notifyJSONObject.toString().getBytes("UTF-8"));
+                urlFetchService.fetchAsync(httpRequest);
+
+            }
+
         } catch (final ServiceException e) {
             final String msg = e.getMessage();
             LOGGER.log(Level.ERROR, "Adds article[title=" + articleTitle + "] failed: {0}", e.getMessage());

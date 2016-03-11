@@ -426,6 +426,31 @@
                     "length": 128
                 },
                 {
+                    "name": "userFrom",
+                    "type": "String",
+                    "length": 15
+                },
+                {
+                    "name": "userDelegateId",
+                    "type": "String",
+                    "length": 30
+                },
+                {
+                    "name": "userCompanyId",
+                    "type": "String",
+                    "length": 30
+                },
+                {
+                    "name": "userCellphone",
+                    "type": "String",
+                    "length": 11
+                },
+                {
+                    "name": "userThirdPartyKey",
+                    "type": "String",
+                    "length": 15
+                },
+                {
                     "name": "userURL",
                     "description": "Belongs to User Profiles",
                     "type": "String",

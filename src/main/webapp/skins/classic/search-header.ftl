@@ -12,7 +12,7 @@
                 <div class="head-fn fn-clear">
                     <h1 class="fn-left">
                         <a href="/" target="_blank">
-                            <img src="${staticServePath}/images/hacpai.png" alt="${symphonyLabel}" title="${symphonyLabel}" width="42" class="fn-pointer" />
+                            <img src="${staticServePath}/images/bayview.png" alt="${symphonyLabel}" title="${symphonyLabel}" width="42" class="fn-pointer" />
                         </a>
                     </h1>
                     <form class="responsive-hide" target="_blank" action="https://search.hacpai.com/cse/search">

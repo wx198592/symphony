@@ -75,6 +75,11 @@ public final class Verifycode {
      */
     public static final int TYPE_C_EMAIL = 0;
 
+    /**
+     * Type - Third Party.
+     */
+    public static final int TYPE_C_THIRD_PARTY = 1;
+
     // Business type constants
     /**
      * Business type - Register.
@@ -85,6 +90,10 @@ public final class Verifycode {
      * Business type - Reset password.
      */
     public static final int BIZ_TYPE_C_RESET_PWD = 1;
+    /**
+     * Business type - Third Party User register.
+     */
+    public static final int BIZ_TYPE_C_THIRD_PARTY_REGISTER = 2;
 
     // Status constants
     /**

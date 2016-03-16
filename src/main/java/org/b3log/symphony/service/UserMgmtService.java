@@ -409,31 +409,31 @@ public class UserMgmtService {
         }
     }
 
-    public void updateThirdPartyKey(final JSONObject requestJSONObject) throws ServiceException {
-        final Transaction transaction = userRepository.beginTransaction();
-
-        try {
-            final String oldUserId = requestJSONObject.optString(Keys.OBJECT_ID);
-            final JSONObject oldUser = userRepository.get(oldUserId);
-
-            if (null == oldUser) {
-                throw new ServiceException(langPropsService.get("updateFailLabel"));
-            }
-
-            // Update
-            oldUser.put(UserExt.USER_THIRD_PARTY_KEY, requestJSONObject.optString(UserExt.USER_THIRD_PARTY_KEY));
-
-            userRepository.update(oldUserId, oldUser);
-            transaction.commit();
-        } catch (final RepositoryException e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-
-            LOGGER.log(Level.ERROR, "Updates user third party key failed", e);
-            throw new ServiceException(e);
-        }
-    }
+//    public void updateThirdPartyKey(final JSONObject requestJSONObject) throws ServiceException {
+//        final Transaction transaction = userRepository.beginTransaction();
+//
+//        try {
+//            final String oldUserId = requestJSONObject.optString(Keys.OBJECT_ID);
+//            final JSONObject oldUser = userRepository.get(oldUserId);
+//
+//            if (null == oldUser) {
+//                throw new ServiceException(langPropsService.get("updateFailLabel"));
+//            }
+//
+//            // Update
+//            oldUser.put(UserExt.USER_THIRD_PARTY_KEY, requestJSONObject.optString(UserExt.USER_THIRD_PARTY_KEY));
+//
+//            userRepository.update(oldUserId, oldUser);
+//            transaction.commit();
+//        } catch (final RepositoryException e) {
+//            if (transaction.isActive()) {
+//                transaction.rollback();
+//            }
+//
+//            LOGGER.log(Level.ERROR, "Updates user third party key failed", e);
+//            throw new ServiceException(e);
+//        }
+//    }
 
     /**
      * Adds a user with the specified request json object.
@@ -460,7 +460,7 @@ public class UserMgmtService {
             final String userName = requestJSONObject.optString(User.USER_NAME);
             final String userDelegateId = requestJSONObject.optString(UserExt.USER_DELEGATE_ID);
             final String userFrom = requestJSONObject.optString(UserExt.USER_FROM);
-            final String userTrdPartyKey = requestJSONObject.optString(UserExt.USER_THIRD_PARTY_KEY);
+//            final String userTrdPartyKey = requestJSONObject.optString(UserExt.USER_THIRD_PARTY_KEY);
             final String userCompanyId = requestJSONObject.optString(UserExt.USER_THIRD_PARTY_COMPANY_ID);
             final String userIcon = requestJSONObject.optString(UserExt.USER_AVATAR_URL);
 
@@ -504,7 +504,7 @@ public class UserMgmtService {
             user.put(UserExt.USER_FROM, userFrom);
             user.put(UserExt.USER_DELEGATE_ID, userDelegateId);
             user.put(UserExt.USER_CELLPHONE, 0);
-            user.put(UserExt.USER_THIRD_PARTY_KEY, userTrdPartyKey);
+//            user.put(UserExt.USER_THIRD_PARTY_KEY, userTrdPartyKey);
             user.put(UserExt.USER_THIRD_PARTY_COMPANY_ID, userCompanyId);
 
             user.put(UserExt.USER_ARTICLE_COUNT, 0);

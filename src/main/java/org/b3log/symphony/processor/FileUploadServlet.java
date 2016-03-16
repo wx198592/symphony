@@ -95,7 +95,7 @@ public class FileUploadServlet extends HttpServlet {
         String path = UPLOAD_DIR + key;
 
         if (!FileUtil.isExistingFile(new File(path))) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            resp.sendError(HttpServletResponse.SC_NO_CONTENT);
 
             return;
         }

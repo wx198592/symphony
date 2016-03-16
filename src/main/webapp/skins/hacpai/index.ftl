@@ -51,7 +51,7 @@
                         <#list indexArticles as article>
                         <li>
                             <div class="header">
-                                <div class='img' style="background-image: url('http://localhost:8084/skins/hacpai/static/images/ad3.jpg')"></div>
+                                <div class='img' style="background-image: url('http://localhost:8080/skins/hacpai/static/images/ad3.jpg')"></div>
                                 <div class="title fn-ellipsis">${article.articleTitle}</div>
                                 <div class="abstract">免费观看、下载、高清大图【无水印】最新海报#创意海报#海报 创意#平面广告#汽车平面广告#汽车海报设计#汽车平面设计#汽车创意海报 #创意广告Iveco依维柯汽车创意海报设计：带着所有的东西</div>
                             </div>
@@ -90,7 +90,7 @@
                         </div>
                         <ul class="fn-list">
                             <li class="fn-flex">
-                                <img src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <div class="fn-flex-1">
                                     <div class="title fn-ellipsis">
                                         Sym 社区介绍
@@ -102,7 +102,7 @@
                             </li>
 
                             <li class="fn-flex">
-                                <img src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <div class="fn-flex-1">
                                     <div class="title fn-ellipsis">
                                         Sym 社区介绍
@@ -122,35 +122,35 @@
                         </div>
                         <div class="fn-clear">
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                             <div class="avatar-wrap">
-                                <img class="avatar" src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img class="avatar" src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <span class="hover"></span>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                         </div>
                         <ul class="fn-list">
                             <li class="fn-flex">
-                                <img src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <div class="fn-flex-1">
                                     <div class="title fn-ellipsis">
                                         Sym 社区介绍
@@ -175,7 +175,7 @@
                             </li>
 
                             <li class="fn-flex">
-                                <img src="http://localhost:8084/skins/hacpai/static/images/ad3.jpg"/>
+                                <img src="http://localhost:8080/skins/hacpai/static/images/ad3.jpg"/>
                                 <div class="fn-flex-1">
                                     <div class="title fn-ellipsis">
                                         Sym 社区介绍

@@ -7,5 +7,5 @@
 <meta name="copyright" content="B3log" />
 <meta http-equiv="Window-target" content="_top" />
 <link type="text/css" rel="stylesheet" href="${staticServePath}/skins/hacpai/static/css/base${miniPostfix}.css?${staticResourceVersion}" />
-<link rel="icon" type="image/png" href="${staticServePath}/favicon.png" />
+<link rel="icon" type="image/png" href="${staticServePath}/bayview.png" />
 </#macro>

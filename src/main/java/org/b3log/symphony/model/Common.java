@@ -583,6 +583,14 @@ public final class Common {
      * Key of third party user icon.
      */
     public static final String THIRD_PARTY_USER_ICON = "thirdPartyUserIcon";
+    /**
+     * Key of third party admins configuration.
+     */
+    public static final String THIRD_PARTY_CONFIG_ADMINS = "thirdPartyConfigAdmins";
+    /**
+     * Key of third party admins configuration (add or delete).
+     */
+    public static final String THIRD_PARTY_CONFIG_ADMINS_ACTION = "thirdPartyConfigAdminsAction";
 
     /**
      * Private constructor.

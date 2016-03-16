@@ -446,11 +446,6 @@
                     "length": 11
                 },
                 {
-                    "name": "userThirdPartyKey",
-                    "type": "String",
-                    "length": 15
-                },
-                {
                     "name": "userURL",
                     "description": "Belongs to User Profiles",
                     "type": "String",

@@ -25,7 +25,7 @@
 <static-files>
     
     <include path="/favicon.ico" />
-    <include path="/favicon.png" />
+    <include path="/bayview.png" />
     <include path="/robots.txt" />
         
     <include path="/js/**.js" />

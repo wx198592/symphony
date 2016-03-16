@@ -29,7 +29,7 @@ public final class UserExt {
     public static final String USER_FROM = "userFrom";
     public static final String USER_DELEGATE_ID = "userDelegateId";
     public static final String USER_CELLPHONE = "userCellphone";
-    public static final String USER_THIRD_PARTY_KEY = "userThirdPartyKey";
+//    public static final String USER_THIRD_PARTY_KEY = "userThirdPartyKey";
     public static final String USER_THIRD_PARTY_COMPANY_ID = "userCompanyId";
     public static final String USER_THIRD_PARTY_ICON = "userCompanyId";
     /**

@@ -506,10 +506,11 @@ public class LoginProcessor {
         LOGGER.info(userDelegateId);
         LOGGER.info(userThirdPartyKey);
         LOGGER.info(userCompanyId);
+        //删除所有已经过期的verifycode
+        verifycodeMgmtService.removeExpiredVerifycodes();
 
         try {
             JSONObject user = userQueryService.getUserByDelegateIdAndCompanyId(userDelegateId, userCompanyId);
-//            LOGGER.info(user.toString());
             if(null == user) {
                 context.renderMsg(langPropsService.get("notFoundUserLabel"));
                 return;
@@ -518,14 +519,25 @@ public class LoginProcessor {
             if (UserExt.USER_STATUS_C_INVALID == user.optInt(UserExt.USER_STATUS)) {
                 userMgmtService.updateOnlineStatus(user.optString(Keys.OBJECT_ID), "", false);
                 context.renderMsg(langPropsService.get("userBlockLabel"));
-
                 return;
             }
 
-            final String userkey = user.optString(UserExt.USER_THIRD_PARTY_KEY);
-            if(userkey.equals(userThirdPartyKey)) {
-                Sessions.login(request, response, user);
+            final JSONObject verifycode = verifycodeQueryService.getVerifycode(userThirdPartyKey);
+            if (null == verifycode) {
+                final AbstractFreeMarkerRenderer renderer = new SkinRenderer();
+                context.setRenderer(renderer);
+                final Map<String, Object> dataModel = renderer.getDataModel();
+                dataModel.put(Keys.MSG, langPropsService.get("verifycodeExpiredLabel"));
+                renderer.setTemplateName("/error/custom.ftl");
+                try {
+                    filler.fillHeaderAndFooter(request, response, dataModel);
+                } catch(final Exception e) {
 
+                }
+
+            } else {
+                Sessions.login(request, response, user);
+                //LOGGER.error();
                 final String ip = Requests.getRemoteAddr(request);
                 userMgmtService.updateOnlineStatus(user.optString(Keys.OBJECT_ID), ip, true);
 
@@ -534,12 +546,30 @@ public class LoginProcessor {
 
                 LOGGER.info("login success...");
                 return;
+
             }
+
+
+//            final String userkey = user.optString(UserExt.USER_THIRD_PARTY_KEY);
+//            if(userkey.equals(userThirdPartyKey)) {
+//                Sessions.login(request, response, user);
+//
+//                final String ip = Requests.getRemoteAddr(request);
+//                userMgmtService.updateOnlineStatus(user.optString(Keys.OBJECT_ID), ip, true);
+//
+//                context.renderMsg("").renderTrueResult();
+//                context.getResponse().sendRedirect("/recent");
+//
+//                LOGGER.info("login success...");
+//                return;
+//            }
             context.renderMsg(langPropsService.get("wrongPwdLabel"));
 
         } catch (final ServiceException e) {
             context.renderMsg(langPropsService.get("loginFailLabel"));
         }
+
+
 
     }
 

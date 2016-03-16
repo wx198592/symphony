@@ -525,7 +525,7 @@ public class ArticleProcessor {
 
             article.put(Article.ARTICLE_T_IS_BROADCAST, false);
 
-            articleMgmtService.addArticle(article);
+            String articleId = articleMgmtService.addArticle(article);
 
             context.renderTrueResult();
 
@@ -567,7 +567,7 @@ public class ArticleProcessor {
                 articleJSONObject.put(Common.THIRD_PARTY_COMPANY_ID, userCompanyId);
                 articleJSONObject.put(Article.ARTICLE_TITLE, articleTitle);
                 articleJSONObject.put(Article.ARTICLE_TAGS, articleTags);
-                articleJSONObject.put(Common.URL, Dingding.FORUM_SERVER_URL);
+                articleJSONObject.put(Common.URL, Dingding.FORUM_SERVER_URL + "article/" +articleId);
 
                 notifyJSONObject.put(Article.ARTICLE, articleJSONObject);
 
